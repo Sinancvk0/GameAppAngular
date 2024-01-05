@@ -1,0 +1,46 @@
+
+<div>
+
+    <div *ngIf="!hasGameEnded; else endedTab">
+      <div *ngIf="!hasGameStarted; else gameTab" >
+        <div class="jumbotron">
+ 
+          <p class="lead">Welcome to the Millionaire Game!</p>
+          <hr class="my-4">
+          <p>Press 'Start' to start! (Yea, sounds a little bit weird :D)</p>
+          <a class="btn btn-primary btn-lg" (click)="startGame()" role="button">START</a>
+        </div>
+      </div>
+  
+      <ng-template #gameTab>
+        <p class="lead">
+            {{questions[counter].text}}
+            <span class="badge badge-info">{{questions[counter].value}}$</span>
+        </p>
+      
+        <div *ngFor="let answer of questions[counter].answers" class="col-md-12">
+            <button (click)="checkAnswer(answer)" class="btn btn-primary btn-block">{{answer.text}}</button>
+        </div>
+  
+        <br>
+        <br>
+  
+        <div class="jokers">
+          <div class="btn-group-lg">
+            <button type="button" class="btn btn-secondary" *ngFor="let joker of jokers" (click)="useJoker(joker)">{{joker.jokerTitle}}</button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  
+    <ng-template #endedTab>
+      <div class="jumbotron jumbotron-fluid bg-dark end text-white">
+        <div class="container">
+          <h1 bold class="text-center">THE GAME HAS ENDED</h1>      
+          <p class="text-center">You got {{sum}}$!</p>
+          <a class="btn btn-primary btn-lg" (click)="goBack()" role="button">Go back</a>
+        </div>
+      </div>
+    </ng-template>
+  
+  </div>
